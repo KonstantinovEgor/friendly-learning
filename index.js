@@ -1,17 +1,32 @@
-const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser')
+
+const authRoutes = require('./authRoutes');
+
+require('dotenv')
+    .config();
+
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
 
 const app = express();
 
-const pathToIndex = path.join(__dirname, 'index.html');
+app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-function startServer() {
-    console.log('Server started')
+app.post('/login', authRoutes.login);
+app.post('/registration', authRoutes.registration);
+
+const start = () => {
+    try {
+
+        app.listen(PORT, () => {
+            console.log(`Server started on port ${HOST}:${PORT}`)
+        });
+
+    } catch(error) {
+        console.log(error);
+    }
 }
-function indexRoute(req, res) {
-    res.sendFile(pathToIndex);
-}
 
-app.use('/', indexRoute);
-
-app.listen(5000, startServer);
+start();
