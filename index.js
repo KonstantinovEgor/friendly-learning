@@ -1,17 +1,22 @@
-const path = require('path');
+const arrayService = require("./arrayService");
+const fileWriter = require("./fileService");
 const express = require('express');
 
 const app = express();
 
-const pathToIndex = path.join(__dirname, 'index.html');
+var arr = process.argv.slice(2);
 
-function startServer() {
-    console.log('Server started')
-}
-function indexRoute(req, res) {
-    res.sendFile(pathToIndex);
+
+
+uniqueArr = arrayService(arr);
+
+
+
+startServer = () => {
+    console.log(`Изначальный массив: ${arr}`);
+    console.log(`Уникальный массив: ${uniqueArr}`);
 }
 
-app.use('/', indexRoute);
+fileWriter(uniqueArr);
 
 app.listen(5000, startServer);
