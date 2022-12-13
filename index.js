@@ -1,17 +1,12 @@
-const path = require('path');
 const express = require('express');
 
+const arrayTask = require('./arrayTask');
+
 const app = express();
+let arr = process.argv.slice(2);
+let newArr = arrayTask(arr)
 
-const pathToIndex = path.join(__dirname, 'index.html');
+console.log(`Массив простых чисел: ${newArr}`);
 
-function startServer() {
-    console.log('Server started')
-}
-function indexRoute(req, res) {
-    res.sendFile(pathToIndex);
-}
 
-app.use('/', indexRoute);
 
-app.listen(5000, startServer);
