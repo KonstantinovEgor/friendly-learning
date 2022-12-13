@@ -19,7 +19,6 @@ app.post('/registration', authRoutes.registration);
 
 const start = () => {
     try {
-
         app.listen(PORT, () => {
             console.log(`Server started on port ${HOST}:${PORT}`)
         });
