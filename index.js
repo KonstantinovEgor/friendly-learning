@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 app.post('/login', authRoutes.login);
 app.post('/registration', authRoutes.registration);
+app.get('/users', authRoutes.users);
 
 const start = () => {
     try {
