@@ -20,8 +20,6 @@ class bd {
             console.log(error);
         }
     }
-<<<<<<< Updated upstream
-=======
 
     getAllUsers = async(obj) => {
         try{
@@ -89,7 +87,6 @@ class bd {
             console.log(error);
         }
     }
->>>>>>> Stashed changes
 }
 
 module.exports = new bd();

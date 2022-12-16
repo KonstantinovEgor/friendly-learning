@@ -14,8 +14,6 @@ class authRoutes {
         else res.json([{'status' : 'error'}, {'message' : 'Ошибка при выполнении запроса'}]);
 
     };
-<<<<<<< Updated upstream
-=======
 
     users = async (req, res) => {
         const body = req.body;
@@ -29,7 +27,6 @@ class authRoutes {
         console.log(arr);
         res.json(arr);
     }
->>>>>>> Stashed changes
 }
 
 module.exports = new authRoutes();

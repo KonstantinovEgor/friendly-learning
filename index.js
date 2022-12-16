@@ -16,11 +16,8 @@ app.use(bodyParser.json());
 
 app.post('/login', authRoutes.login);
 app.post('/registration', authRoutes.registration);
-<<<<<<< Updated upstream
-=======
 app.get('/users', authRoutes.users);
 app.get('/user', authRoutes.user);
->>>>>>> Stashed changes
 
 const start = () => {
     try {
