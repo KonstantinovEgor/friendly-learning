@@ -1,32 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser')
+const fs = require("fs");
 
-const authRoutes = require('./authRoutes');
+const getMaxNumber = require('./function');
+ 
+let fileContent = fs.readFileSync('ArrayTask.txt', 'utf8');
+let arr = fileContent.split(' ');
+let newArray = getMaxNumber(arr);
 
-require('dotenv')
-    .config();
-
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
-
-const app = express();
-
-app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-app.post('/login', authRoutes.login);
-app.post('/registration', authRoutes.registration);
-
-const start = () => {
-    try {
-
-        app.listen(PORT, () => {
-            console.log(`Server started on port ${HOST}:${PORT}`)
-        });
-
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-start();
+fs.writeFile('NewArray.txt', String(newArray), function(error){
+    if(error) throw error; 
+    console.log(`Данные записанные в файл:${newArray}`)
+ });
