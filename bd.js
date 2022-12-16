@@ -25,27 +25,20 @@ class bd {
 
     getAllUsers = async(obj) => {
         try{
-            const array = fs.readFileSync(this.pathToUsersModel).toString().split("\n");
+            const array = (await fs.readFileSync(this.pathToUsersModel, () => {})).toString().split("\n");
 
-            var arr = [];
-            
+            var arrayObj = [];
             for(let i = 0; i < array.length - 1; i++){
                 var temp = array[i].split(':');
-                arr[i] = [parseInt(temp[0]), temp[1], temp[2]];
-            }
-            
-            // let jsonArr = {};
-            
-            // for(let i = 0; i < arr.length; i++) {
-            //     for(let j = 0; j < 2; j++){
-            //         jsonArr.push(`{user_id: ${arr[i][0]}, user_login: "${arr[i][1]}", user_password: "${arr[i][2]}"}`)
-            //     }
-            // }
+                let arr = {
+                    id: parseInt(temp[0]),
+                    login: temp[1],
+                    password: temp[2]
+                }
+                arrayObj[i] = arr;
+            } 
 
-            // const jsonString = JSON.stringify([1, 2, 3, 4, 5]);
-            // console.log(jsonString);
-
-            return arr;
+            return arrayObj;
         } catch(error) {
             console.log(error);
         }
