@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 
 const sequelize = require('./db');
+const models = require('./models/index');
+const router = require('./routes/index');
 
 require('dotenv')
     .config();
@@ -11,6 +13,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api', router);
 
 const start = async () => {
     try {
