@@ -13,6 +13,21 @@ const User = sequelize.define('user', {
     }
 });
 
+const UserRole = sequelize.define('user_role', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false
+    },
+    user_id: {
+        type: DataTypes.INTEGER, allowNull: false
+    },
+    name: {
+        type: DataTypes.STRING, defaultValue: 'standard user'
+    },
+    permission_level: {
+        type: DataTypes.SMALLINT, defaultValue: 1
+    },
+})
+
 const Basket = sequelize.define('basket', {
     id: {
         type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false
@@ -121,6 +136,9 @@ const Rating = sequelize.define('rating', {
 User.hasOne(Basket, { foreignKey: 'id' });
 Basket.belongsTo(User, { foreignKey: 'user_id' });
 
+User.hasOne(UserRole, { foreignKey: 'id' });
+UserRole.belongsTo(User, { foreignKey: 'user_id' });
+
 Basket.hasMany(BasketDevice, { foreignKey: 'id' });
 BasketDevice.belongsTo(Basket, { foreignKey: 'basket_id' });
 
@@ -147,6 +165,7 @@ Rating.belongsTo(Device, { foreignKey: 'device_id' });
 
 module.exports = {
     User,
+    UserRole,
     Basket,
     BasketDevice,
     Device,
